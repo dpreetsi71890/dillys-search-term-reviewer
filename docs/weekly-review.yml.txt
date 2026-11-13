@@ -1,0 +1,73 @@
+name: Dilly's weekly search review
+
+'on':
+  workflow_dispatch:
+    inputs:
+      demo:
+        description: Reproduce the supplied historical dataset as of October 1 2026
+        required: true
+        default: true
+        type: boolean
+  schedule:
+    # Monday at 16:17 UTC (08:17 Pacific standard / 09:17 Pacific daylight).
+    - cron: '17 16 * * 1'
+  push:
+    branches: [main, master]
+    paths:
+      - 'search_review.py'
+      - 'config.json'
+      - 'requirements.txt'
+      - 'data/**'
+      - 'tests/**'
+      - '.github/workflows/weekly-review.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: search-review-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Read repository files
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install the Excel reader
+        run: python -m pip install -r requirements.txt
+
+      - name: Check decision rules
+        run: python -m unittest discover -s tests -v
+
+      - name: Generate the review
+        env:
+          REVIEW_DEMO: ${{ github.event_name == 'workflow_dispatch' && inputs.demo }}
+        shell: bash
+        run: |
+          if [[ "$REVIEW_DEMO" == "true" ]]; then
+            python search_review.py --input data/relay_cloud_paid_media_dataset.xlsx --output output --config config.json --as-of 2026-10-01
+          else
+            python search_review.py --input data/relay_cloud_paid_media_dataset.xlsx --output output --config config.json
+          fi
+
+      - name: Show the plain language summary
+        run: cat output/summary.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Save the report for review
+        uses: actions/upload-artifact@v7
+        with:
+          name: dillys-search-review-report
+          path: output/
+          if-no-files-found: error
+          retention-days: 30

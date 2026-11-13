@@ -1,0 +1,53 @@
+{
+  "search_sheet": "Search Terms (last 90d)",
+  "campaign_sheet": "Campaign Summary (6 mo)",
+  "min_spend": 500,
+  "min_clicks": 50,
+  "stale_after_days": 14,
+  "scope_note": "Selected rolling 90-day search-term export. This is not a full-account export and not one week of spend. Repeated runs may cover overlapping dates; never add their spend together.",
+  "product_labels": {
+    "Voice AI Agents": "voice",
+    "Inference API (new)": "inference"
+  },
+  "buyer_intent_patterns": ["\\bpricing\\b", "\\balternatives?\\b", "\\bvs\\b", "\\bcompare\\b", "\\bcomparison\\b", "\\bapi\\b", "\\bsdk\\b", "\\bintegrations?\\b", "\\benterprise\\b", "\\bbusiness\\b", "\\bplatform\\b", "\\bsoftware\\b"],
+  "review_patterns": [
+    {
+      "id": "free_business_receptionist",
+      "products": ["voice"],
+      "pattern": "\\b(?:free.*receptionist|receptionist.*free)\\b",
+      "reason": "Free receptionist searches may still be a business buyer evaluating a trial. Review the landing page and lead quality before excluding this exact query."
+    },
+    {
+      "id": "free_developer_api",
+      "products": ["inference"],
+      "pattern": "\\bfree\\b.*\\b(?:api|llm)\\b|\\b(?:api|llm)\\b.*\\bfree\\b",
+      "reason": "A free API query can be developer evaluation intent. Inspect activation and later payment evidence; zero CRM leads alone does not prove it is irrelevant."
+    }
+  ],
+  "negative_patterns": [
+    {
+      "id": "job_seeker",
+      "products": ["voice", "inference"],
+      "pattern": "\\b(?:jobs?|careers?|salar(?:y|ies))\\b",
+      "reason": "The query expresses job-seeker intent rather than intent to buy the advertised product."
+    },
+    {
+      "id": "consumer_voice_tool",
+      "products": ["voice"],
+      "pattern": "\\bvoice (?:generator|changer)\\b|\\btext to speech online free\\b|\\bchatgpt voice mode\\b",
+      "reason": "The query names a consumer voice tool or consumer ChatGPT feature rather than a business phone-agent platform."
+    },
+    {
+      "id": "competitor_existing_user_navigation",
+      "products": ["voice"],
+      "pattern": "\\b(?:vapi|retell(?: ai)?)\\b.*\\b(?:login|log in|status|support)\\b",
+      "reason": "The query appears to be navigation or support for an existing competitor user. Keep competitor pricing and alternative searches eligible."
+    },
+    {
+      "id": "consumer_chatgpt",
+      "products": ["inference"],
+      "pattern": "^chatgpt free$|^free chatgpt$",
+      "reason": "The query asks for the consumer ChatGPT service and does not express API or developer intent."
+    }
+  ]
+}

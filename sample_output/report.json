@@ -1,0 +1,923 @@
+{
+  "schema_version": 1,
+  "tool_version": "1.0.0",
+  "review_as_of": "2026-10-01",
+  "generated_at_utc": "2026-11-13T13:27:00+00:00",
+  "source": {
+    "filename": "relay_cloud_paid_media_dataset.xlsx",
+    "sha256": "093c01144103af123901c026dddbbb14ffddd47e2a33767a2c4517175b2661fe",
+    "sheet": "Search Terms (last 90d)",
+    "source_as_of": "2026-10-01",
+    "age_days": 0,
+    "freshness": "current_for_review_date",
+    "source_rows": 28,
+    "campaign_query_pairs": 28,
+    "scope_note": "Selected rolling 90-day search-term export. This is not a full-account export and not one week of spend. Repeated runs may cover overlapping dates; never add their spend together."
+  },
+  "config": {
+    "search_sheet": "Search Terms (last 90d)",
+    "campaign_sheet": "Campaign Summary (6 mo)",
+    "min_spend": 500.0,
+    "min_clicks": 50,
+    "stale_after_days": 14,
+    "scope_note": "Selected rolling 90-day search-term export. This is not a full-account export and not one week of spend. Repeated runs may cover overlapping dates; never add their spend together.",
+    "product_labels": {
+      "Voice AI Agents": "voice",
+      "Inference API (new)": "inference"
+    },
+    "buyer_intent_patterns": [
+      "\\bpricing\\b",
+      "\\balternatives?\\b",
+      "\\bvs\\b",
+      "\\bcompare\\b",
+      "\\bcomparison\\b",
+      "\\bapi\\b",
+      "\\bsdk\\b",
+      "\\bintegrations?\\b",
+      "\\benterprise\\b",
+      "\\bbusiness\\b",
+      "\\bplatform\\b",
+      "\\bsoftware\\b"
+    ],
+    "review_patterns": [
+      {
+        "id": "free_business_receptionist",
+        "products": [
+          "voice"
+        ],
+        "pattern": "\\b(?:free.*receptionist|receptionist.*free)\\b",
+        "reason": "Free receptionist searches may still be a business buyer evaluating a trial. Review the landing page and lead quality before excluding this exact query."
+      },
+      {
+        "id": "free_developer_api",
+        "products": [
+          "inference"
+        ],
+        "pattern": "\\bfree\\b.*\\b(?:api|llm)\\b|\\b(?:api|llm)\\b.*\\bfree\\b",
+        "reason": "A free API query can be developer evaluation intent. Inspect activation and later payment evidence; zero CRM leads alone does not prove it is irrelevant."
+      }
+    ],
+    "negative_patterns": [
+      {
+        "id": "job_seeker",
+        "products": [
+          "voice",
+          "inference"
+        ],
+        "pattern": "\\b(?:jobs?|careers?|salar(?:y|ies))\\b",
+        "reason": "The query expresses job-seeker intent rather than intent to buy the advertised product."
+      },
+      {
+        "id": "consumer_voice_tool",
+        "products": [
+          "voice"
+        ],
+        "pattern": "\\bvoice (?:generator|changer)\\b|\\btext to speech online free\\b|\\bchatgpt voice mode\\b",
+        "reason": "The query names a consumer voice tool or consumer ChatGPT feature rather than a business phone-agent platform."
+      },
+      {
+        "id": "competitor_existing_user_navigation",
+        "products": [
+          "voice"
+        ],
+        "pattern": "\\b(?:vapi|retell(?: ai)?)\\b.*\\b(?:login|log in|status|support)\\b",
+        "reason": "The query appears to be navigation or support for an existing competitor user. Keep competitor pricing and alternative searches eligible."
+      },
+      {
+        "id": "consumer_chatgpt",
+        "products": [
+          "inference"
+        ],
+        "pattern": "^chatgpt free$|^free chatgpt$",
+        "reason": "The query asks for the consumer ChatGPT service and does not express API or developer intent."
+      }
+    ]
+  },
+  "metrics": {
+    "export_spend": 51030.0,
+    "zero_lead_pairs": 13,
+    "zero_lead_spend": 19640.0,
+    "zero_lead_share_pct": 38.49,
+    "exact_negative_proposals": 11,
+    "proposal_historical_spend": 16460.0,
+    "manual_review_pairs": 2,
+    "manual_review_historical_spend": 3180.0,
+    "actions": {
+      "PROPOSE_EXACT_NEGATIVE": 11,
+      "REVIEW": 2,
+      "KEEP": 15
+    }
+  },
+  "automation_boundary": {
+    "automatic": [
+      "Read and validate the workbook",
+      "Recalculate every query using current values",
+      "Classify configured intent patterns",
+      "Create and prioritize draft proposals with evidence",
+      "Save reports and flag stale data"
+    ],
+    "human_required": [
+      "Verify intent, tracking and source freshness",
+      "Approve or reject each exact negative",
+      "Apply changes to the ad platform and log reviewer/date",
+      "Approve any budget or bid change",
+      "Check qualified-volume impact and reverse harmful exclusions"
+    ],
+    "platform_changes_applied": 0
+  },
+  "warnings": [],
+  "limitations": [
+    "Historical spend attached to a flagged query is an exposure measure, not forecast or guaranteed savings.",
+    "A rolling snapshot is rerun weekly; its rows are not weekly cohorts. Do not sum reports from overlapping exports.",
+    "CRM leads do not establish MQL quality, incremental demand, pipeline or profitability.",
+    "Intent patterns are editable assumptions and can misclassify new language. A person must approve every targeting change.",
+    "The code does not read or write existing platform negative lists; an approver must check for duplicates and conflicts.",
+    "Negative proposals are exact and campaign-specific; never turn a full query into an account-wide broad exclusion."
+  ],
+  "results": [
+    {
+      "campaign": "GS - Competitor - Voice AI",
+      "search_term": "vapi login",
+      "product": "voice",
+      "match_types": [
+        "Broad"
+      ],
+      "source_rows": [
+        22
+      ],
+      "impressions": 5200,
+      "clicks": 210,
+      "cost": 2520.0,
+      "platform_conversions": 2.0,
+      "crm_leads": 0,
+      "proposal_id": "fec710bf0b16",
+      "action": "PROPOSE_EXACT_NEGATIVE",
+      "priority": "P1",
+      "rule_id": "competitor_existing_user_navigation",
+      "reason": "The query appears to be navigation or support for an existing competitor user. Keep competitor pricing and alternative searches eligible.",
+      "source_reference": "Search Terms (last 90d) rows 22",
+      "proposed_negative": "vapi login",
+      "negative_match_type": "Exact",
+      "change_scope": "Campaign only",
+      "approval_status": "AWAITING_HUMAN_REVIEW",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Verify current export, campaign intent, tracking and existing negatives. If approved, add only this exact term to this campaign; record the reviewer and date. Check qualified volume and cost/MQL over 2–4 weeks; revert if relevant demand is blocked."
+    },
+    {
+      "campaign": "GS - NonBrand - AI Contact Center",
+      "search_term": "call center jobs remote",
+      "product": "voice",
+      "match_types": [
+        "Broad"
+      ],
+      "source_rows": [
+        16
+      ],
+      "impressions": 8400,
+      "clicks": 300,
+      "cost": 2400.0,
+      "platform_conversions": 12.0,
+      "crm_leads": 0,
+      "proposal_id": "1e308855aac8",
+      "action": "PROPOSE_EXACT_NEGATIVE",
+      "priority": "P1",
+      "rule_id": "job_seeker",
+      "reason": "The query expresses job-seeker intent rather than intent to buy the advertised product.",
+      "source_reference": "Search Terms (last 90d) rows 16",
+      "proposed_negative": "call center jobs remote",
+      "negative_match_type": "Exact",
+      "change_scope": "Campaign only",
+      "approval_status": "AWAITING_HUMAN_REVIEW",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Verify current export, campaign intent, tracking and existing negatives. If approved, add only this exact term to this campaign; record the reviewer and date. Check qualified volume and cost/MQL over 2–4 weeks; revert if relevant demand is blocked."
+    },
+    {
+      "campaign": "GS - NonBrand - Voice AI Agents",
+      "search_term": "ai voice generator free",
+      "product": "voice",
+      "match_types": [
+        "Broad"
+      ],
+      "source_rows": [
+        8
+      ],
+      "impressions": 7300,
+      "clicks": 260,
+      "cost": 2340.0,
+      "platform_conversions": 11.0,
+      "crm_leads": 0,
+      "proposal_id": "990e90a7618b",
+      "action": "PROPOSE_EXACT_NEGATIVE",
+      "priority": "P1",
+      "rule_id": "consumer_voice_tool",
+      "reason": "The query names a consumer voice tool or consumer ChatGPT feature rather than a business phone-agent platform.",
+      "source_reference": "Search Terms (last 90d) rows 8",
+      "proposed_negative": "ai voice generator free",
+      "negative_match_type": "Exact",
+      "change_scope": "Campaign only",
+      "approval_status": "AWAITING_HUMAN_REVIEW",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Verify current export, campaign intent, tracking and existing negatives. If approved, add only this exact term to this campaign; record the reviewer and date. Check qualified volume and cost/MQL over 2–4 weeks; revert if relevant demand is blocked."
+    },
+    {
+      "campaign": "GS - NonBrand - Voice AI Agents",
+      "search_term": "free ai voice changer",
+      "product": "voice",
+      "match_types": [
+        "Broad"
+      ],
+      "source_rows": [
+        9
+      ],
+      "impressions": 6200,
+      "clicks": 210,
+      "cost": 1890.0,
+      "platform_conversions": 5.0,
+      "crm_leads": 0,
+      "proposal_id": "6d794ddf2aff",
+      "action": "PROPOSE_EXACT_NEGATIVE",
+      "priority": "P1",
+      "rule_id": "consumer_voice_tool",
+      "reason": "The query names a consumer voice tool or consumer ChatGPT feature rather than a business phone-agent platform.",
+      "source_reference": "Search Terms (last 90d) rows 9",
+      "proposed_negative": "free ai voice changer",
+      "negative_match_type": "Exact",
+      "change_scope": "Campaign only",
+      "approval_status": "AWAITING_HUMAN_REVIEW",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Verify current export, campaign intent, tracking and existing negatives. If approved, add only this exact term to this campaign; record the reviewer and date. Check qualified volume and cost/MQL over 2–4 weeks; revert if relevant demand is blocked."
+    },
+    {
+      "campaign": "GS - NonBrand - Voice AI Agents",
+      "search_term": "voice ai jobs",
+      "product": "voice",
+      "match_types": [
+        "Broad"
+      ],
+      "source_rows": [
+        7
+      ],
+      "impressions": 4100,
+      "clicks": 190,
+      "cost": 1710.0,
+      "platform_conversions": 6.0,
+      "crm_leads": 0,
+      "proposal_id": "8556ff3f5e51",
+      "action": "PROPOSE_EXACT_NEGATIVE",
+      "priority": "P1",
+      "rule_id": "job_seeker",
+      "reason": "The query expresses job-seeker intent rather than intent to buy the advertised product.",
+      "source_reference": "Search Terms (last 90d) rows 7",
+      "proposed_negative": "voice ai jobs",
+      "negative_match_type": "Exact",
+      "change_scope": "Campaign only",
+      "approval_status": "AWAITING_HUMAN_REVIEW",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Verify current export, campaign intent, tracking and existing negatives. If approved, add only this exact term to this campaign; record the reviewer and date. Check qualified volume and cost/MQL over 2–4 weeks; revert if relevant demand is blocked."
+    },
+    {
+      "campaign": "GS - Competitor - Voice AI",
+      "search_term": "vapi status",
+      "product": "voice",
+      "match_types": [
+        "Broad"
+      ],
+      "source_rows": [
+        23
+      ],
+      "impressions": 2700,
+      "clicks": 110,
+      "cost": 1320.0,
+      "platform_conversions": 0.0,
+      "crm_leads": 0,
+      "proposal_id": "913d9a084132",
+      "action": "PROPOSE_EXACT_NEGATIVE",
+      "priority": "P1",
+      "rule_id": "competitor_existing_user_navigation",
+      "reason": "The query appears to be navigation or support for an existing competitor user. Keep competitor pricing and alternative searches eligible.",
+      "source_reference": "Search Terms (last 90d) rows 23",
+      "proposed_negative": "vapi status",
+      "negative_match_type": "Exact",
+      "change_scope": "Campaign only",
+      "approval_status": "AWAITING_HUMAN_REVIEW",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Verify current export, campaign intent, tracking and existing negatives. If approved, add only this exact term to this campaign; record the reviewer and date. Check qualified volume and cost/MQL over 2–4 weeks; revert if relevant demand is blocked."
+    },
+    {
+      "campaign": "GS - NonBrand - Voice AI Agents",
+      "search_term": "text to speech online free",
+      "product": "voice",
+      "match_types": [
+        "Broad"
+      ],
+      "source_rows": [
+        10
+      ],
+      "impressions": 3400,
+      "clicks": 140,
+      "cost": 1260.0,
+      "platform_conversions": 3.0,
+      "crm_leads": 0,
+      "proposal_id": "bbdc48cc95b3",
+      "action": "PROPOSE_EXACT_NEGATIVE",
+      "priority": "P1",
+      "rule_id": "consumer_voice_tool",
+      "reason": "The query names a consumer voice tool or consumer ChatGPT feature rather than a business phone-agent platform.",
+      "source_reference": "Search Terms (last 90d) rows 10",
+      "proposed_negative": "text to speech online free",
+      "negative_match_type": "Exact",
+      "change_scope": "Campaign only",
+      "approval_status": "AWAITING_HUMAN_REVIEW",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Verify current export, campaign intent, tracking and existing negatives. If approved, add only this exact term to this campaign; record the reviewer and date. Check qualified volume and cost/MQL over 2–4 weeks; revert if relevant demand is blocked."
+    },
+    {
+      "campaign": "GS - NonBrand - AI Contact Center",
+      "search_term": "chatgpt voice mode",
+      "product": "voice",
+      "match_types": [
+        "Broad"
+      ],
+      "source_rows": [
+        17
+      ],
+      "impressions": 3600,
+      "clicks": 120,
+      "cost": 960.0,
+      "platform_conversions": 3.0,
+      "crm_leads": 0,
+      "proposal_id": "310e0f5ac5f1",
+      "action": "PROPOSE_EXACT_NEGATIVE",
+      "priority": "P1",
+      "rule_id": "consumer_voice_tool",
+      "reason": "The query names a consumer voice tool or consumer ChatGPT feature rather than a business phone-agent platform.",
+      "source_reference": "Search Terms (last 90d) rows 17",
+      "proposed_negative": "chatgpt voice mode",
+      "negative_match_type": "Exact",
+      "change_scope": "Campaign only",
+      "approval_status": "AWAITING_HUMAN_REVIEW",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Verify current export, campaign intent, tracking and existing negatives. If approved, add only this exact term to this campaign; record the reviewer and date. Check qualified volume and cost/MQL over 2–4 weeks; revert if relevant demand is blocked."
+    },
+    {
+      "campaign": "GS - Competitor - Voice AI",
+      "search_term": "retell ai support",
+      "product": "voice",
+      "match_types": [
+        "Broad"
+      ],
+      "source_rows": [
+        24
+      ],
+      "impressions": 1600,
+      "clicks": 70,
+      "cost": 840.0,
+      "platform_conversions": 0.0,
+      "crm_leads": 0,
+      "proposal_id": "4bbd39bc43d1",
+      "action": "PROPOSE_EXACT_NEGATIVE",
+      "priority": "P1",
+      "rule_id": "competitor_existing_user_navigation",
+      "reason": "The query appears to be navigation or support for an existing competitor user. Keep competitor pricing and alternative searches eligible.",
+      "source_reference": "Search Terms (last 90d) rows 24",
+      "proposed_negative": "retell ai support",
+      "negative_match_type": "Exact",
+      "change_scope": "Campaign only",
+      "approval_status": "AWAITING_HUMAN_REVIEW",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Verify current export, campaign intent, tracking and existing negatives. If approved, add only this exact term to this campaign; record the reviewer and date. Check qualified volume and cost/MQL over 2–4 weeks; revert if relevant demand is blocked."
+    },
+    {
+      "campaign": "INF - GS - Category Search",
+      "search_term": "chatgpt free",
+      "product": "inference",
+      "match_types": [
+        "Broad"
+      ],
+      "source_rows": [
+        29
+      ],
+      "impressions": 3300,
+      "clicks": 110,
+      "cost": 660.0,
+      "platform_conversions": 0.0,
+      "crm_leads": 0,
+      "proposal_id": "f2a88596975d",
+      "action": "PROPOSE_EXACT_NEGATIVE",
+      "priority": "P1",
+      "rule_id": "consumer_chatgpt",
+      "reason": "The query asks for the consumer ChatGPT service and does not express API or developer intent.",
+      "source_reference": "Search Terms (last 90d) rows 29",
+      "proposed_negative": "chatgpt free",
+      "negative_match_type": "Exact",
+      "change_scope": "Campaign only",
+      "approval_status": "AWAITING_HUMAN_REVIEW",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Verify current export, campaign intent, tracking and existing negatives. If approved, add only this exact term to this campaign; record the reviewer and date. Check qualified volume and cost/MQL over 2–4 weeks; revert if relevant demand is blocked."
+    },
+    {
+      "campaign": "GS - NonBrand - AI Contact Center",
+      "search_term": "ai customer service jobs",
+      "product": "voice",
+      "match_types": [
+        "Broad"
+      ],
+      "source_rows": [
+        18
+      ],
+      "impressions": 1900,
+      "clicks": 70,
+      "cost": 560.0,
+      "platform_conversions": 1.0,
+      "crm_leads": 0,
+      "proposal_id": "738097bc5aa7",
+      "action": "PROPOSE_EXACT_NEGATIVE",
+      "priority": "P1",
+      "rule_id": "job_seeker",
+      "reason": "The query expresses job-seeker intent rather than intent to buy the advertised product.",
+      "source_reference": "Search Terms (last 90d) rows 18",
+      "proposed_negative": "ai customer service jobs",
+      "negative_match_type": "Exact",
+      "change_scope": "Campaign only",
+      "approval_status": "AWAITING_HUMAN_REVIEW",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Verify current export, campaign intent, tracking and existing negatives. If approved, add only this exact term to this campaign; record the reviewer and date. Check qualified volume and cost/MQL over 2–4 weeks; revert if relevant demand is blocked."
+    },
+    {
+      "campaign": "GS - NonBrand - AI Contact Center",
+      "search_term": "ai receptionist free",
+      "product": "voice",
+      "match_types": [
+        "Broad"
+      ],
+      "source_rows": [
+        15
+      ],
+      "impressions": 9100,
+      "clicks": 330,
+      "cost": 2640.0,
+      "platform_conversions": 14.0,
+      "crm_leads": 0,
+      "proposal_id": "dae3c3c74b43",
+      "action": "REVIEW",
+      "priority": "P2",
+      "rule_id": "free_business_receptionist",
+      "reason": "Free receptionist searches may still be a business buyer evaluating a trial. Review the landing page and lead quality before excluding this exact query.",
+      "source_reference": "Search Terms (last 90d) rows 15",
+      "proposed_negative": "",
+      "negative_match_type": "",
+      "change_scope": "",
+      "approval_status": "AWAITING_HUMAN_REVIEW",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Review intent, attribution and relevant product outcomes; record the decision before changing targeting."
+    },
+    {
+      "campaign": "INF - GS - Category Search",
+      "search_term": "free llm api",
+      "product": "inference",
+      "match_types": [
+        "Broad"
+      ],
+      "source_rows": [
+        28
+      ],
+      "impressions": 1900,
+      "clicks": 90,
+      "cost": 540.0,
+      "platform_conversions": 1.0,
+      "crm_leads": 0,
+      "proposal_id": "c3f2c9806014",
+      "action": "REVIEW",
+      "priority": "P2",
+      "rule_id": "free_developer_api",
+      "reason": "A free API query can be developer evaluation intent. Inspect activation and later payment evidence; zero CRM leads alone does not prove it is irrelevant.",
+      "source_reference": "Search Terms (last 90d) rows 28",
+      "proposed_negative": "",
+      "negative_match_type": "",
+      "change_scope": "",
+      "approval_status": "AWAITING_HUMAN_REVIEW",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Review intent, attribution and relevant product outcomes; record the decision before changing targeting."
+    },
+    {
+      "campaign": "GS - NonBrand - Voice AI Agents",
+      "search_term": "voice ai api",
+      "product": "voice",
+      "match_types": [
+        "Phrase"
+      ],
+      "source_rows": [
+        2
+      ],
+      "impressions": 14200,
+      "clicks": 610,
+      "cost": 5490.0,
+      "platform_conversions": 24.0,
+      "crm_leads": 22,
+      "proposal_id": "2556396426d3",
+      "action": "KEEP",
+      "priority": "P3",
+      "rule_id": "crm_leads_present",
+      "reason": "This campaign/query produced CRM leads. Keep eligible; this tool does not evaluate downstream lead quality or prove profitability.",
+      "source_reference": "Search Terms (last 90d) rows 2",
+      "proposed_negative": "",
+      "negative_match_type": "",
+      "change_scope": "",
+      "approval_status": "NO_CHANGE_PROPOSED",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Keep monitoring; no platform change is proposed."
+    },
+    {
+      "campaign": "GS - NonBrand - AI Contact Center",
+      "search_term": "ai call center software",
+      "product": "voice",
+      "match_types": [
+        "Phrase"
+      ],
+      "source_rows": [
+        11
+      ],
+      "impressions": 11800,
+      "clicks": 520,
+      "cost": 4160.0,
+      "platform_conversions": 19.0,
+      "crm_leads": 17,
+      "proposal_id": "dd0c06273518",
+      "action": "KEEP",
+      "priority": "P3",
+      "rule_id": "crm_leads_present",
+      "reason": "This campaign/query produced CRM leads. Keep eligible; this tool does not evaluate downstream lead quality or prove profitability.",
+      "source_reference": "Search Terms (last 90d) rows 11",
+      "proposed_negative": "",
+      "negative_match_type": "",
+      "change_scope": "",
+      "approval_status": "NO_CHANGE_PROPOSED",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Keep monitoring; no platform change is proposed."
+    },
+    {
+      "campaign": "GS - NonBrand - Voice AI Agents",
+      "search_term": "conversational ai phone api",
+      "product": "voice",
+      "match_types": [
+        "Phrase"
+      ],
+      "source_rows": [
+        4
+      ],
+      "impressions": 9800,
+      "clicks": 420,
+      "cost": 3780.0,
+      "platform_conversions": 15.0,
+      "crm_leads": 13,
+      "proposal_id": "516a1e555325",
+      "action": "KEEP",
+      "priority": "P3",
+      "rule_id": "crm_leads_present",
+      "reason": "This campaign/query produced CRM leads. Keep eligible; this tool does not evaluate downstream lead quality or prove profitability.",
+      "source_reference": "Search Terms (last 90d) rows 4",
+      "proposed_negative": "",
+      "negative_match_type": "",
+      "change_scope": "",
+      "approval_status": "NO_CHANGE_PROPOSED",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Keep monitoring; no platform change is proposed."
+    },
+    {
+      "campaign": "GS - NonBrand - Voice AI Agents",
+      "search_term": "ai voice agent platform",
+      "product": "voice",
+      "match_types": [
+        "Exact"
+      ],
+      "source_rows": [
+        3
+      ],
+      "impressions": 6100,
+      "clicks": 340,
+      "cost": 3060.0,
+      "platform_conversions": 16.0,
+      "crm_leads": 15,
+      "proposal_id": "388392729b50",
+      "action": "KEEP",
+      "priority": "P3",
+      "rule_id": "crm_leads_present",
+      "reason": "This campaign/query produced CRM leads. Keep eligible; this tool does not evaluate downstream lead quality or prove profitability.",
+      "source_reference": "Search Terms (last 90d) rows 3",
+      "proposed_negative": "",
+      "negative_match_type": "",
+      "change_scope": "",
+      "approval_status": "NO_CHANGE_PROPOSED",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Keep monitoring; no platform change is proposed."
+    },
+    {
+      "campaign": "GS - NonBrand - Voice AI Agents",
+      "search_term": "voice ai pricing",
+      "product": "voice",
+      "match_types": [
+        "Phrase"
+      ],
+      "source_rows": [
+        6
+      ],
+      "impressions": 3900,
+      "clicks": 260,
+      "cost": 2340.0,
+      "platform_conversions": 31.0,
+      "crm_leads": 9,
+      "proposal_id": "a6eeee056394",
+      "action": "KEEP",
+      "priority": "P3",
+      "rule_id": "crm_leads_present",
+      "reason": "This campaign/query produced CRM leads. Keep eligible; this tool does not evaluate downstream lead quality or prove profitability.",
+      "source_reference": "Search Terms (last 90d) rows 6",
+      "proposed_negative": "",
+      "negative_match_type": "",
+      "change_scope": "",
+      "approval_status": "NO_CHANGE_PROPOSED",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Keep monitoring; no platform change is proposed."
+    },
+    {
+      "campaign": "GS - NonBrand - Voice AI Agents",
+      "search_term": "build voice agent",
+      "product": "voice",
+      "match_types": [
+        "Broad"
+      ],
+      "source_rows": [
+        5
+      ],
+      "impressions": 5200,
+      "clicks": 230,
+      "cost": 2070.0,
+      "platform_conversions": 9.0,
+      "crm_leads": 8,
+      "proposal_id": "584fcca45094",
+      "action": "KEEP",
+      "priority": "P3",
+      "rule_id": "crm_leads_present",
+      "reason": "This campaign/query produced CRM leads. Keep eligible; this tool does not evaluate downstream lead quality or prove profitability.",
+      "source_reference": "Search Terms (last 90d) rows 5",
+      "proposed_negative": "",
+      "negative_match_type": "",
+      "change_scope": "",
+      "approval_status": "NO_CHANGE_PROPOSED",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Keep monitoring; no platform change is proposed."
+    },
+    {
+      "campaign": "GS - NonBrand - AI Contact Center",
+      "search_term": "ai receptionist for business",
+      "product": "voice",
+      "match_types": [
+        "Exact"
+      ],
+      "source_rows": [
+        12
+      ],
+      "impressions": 4200,
+      "clicks": 210,
+      "cost": 1680.0,
+      "platform_conversions": 9.0,
+      "crm_leads": 8,
+      "proposal_id": "556cfc4140db",
+      "action": "KEEP",
+      "priority": "P3",
+      "rule_id": "crm_leads_present",
+      "reason": "This campaign/query produced CRM leads. Keep eligible; this tool does not evaluate downstream lead quality or prove profitability.",
+      "source_reference": "Search Terms (last 90d) rows 12",
+      "proposed_negative": "",
+      "negative_match_type": "",
+      "change_scope": "",
+      "approval_status": "NO_CHANGE_PROPOSED",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Keep monitoring; no platform change is proposed."
+    },
+    {
+      "campaign": "GS - Competitor - Voice AI",
+      "search_term": "vapi pricing",
+      "product": "voice",
+      "match_types": [
+        "Phrase"
+      ],
+      "source_rows": [
+        21
+      ],
+      "impressions": 2300,
+      "clicks": 130,
+      "cost": 1560.0,
+      "platform_conversions": 7.0,
+      "crm_leads": 4,
+      "proposal_id": "0ac4524f60ed",
+      "action": "KEEP",
+      "priority": "P3",
+      "rule_id": "crm_leads_present",
+      "reason": "This campaign/query produced CRM leads. Keep eligible; this tool does not evaluate downstream lead quality or prove profitability.",
+      "source_reference": "Search Terms (last 90d) rows 21",
+      "proposed_negative": "",
+      "negative_match_type": "",
+      "change_scope": "",
+      "approval_status": "NO_CHANGE_PROPOSED",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Keep monitoring; no platform change is proposed."
+    },
+    {
+      "campaign": "GS - Competitor - Voice AI",
+      "search_term": "vapi alternative",
+      "product": "voice",
+      "match_types": [
+        "Exact"
+      ],
+      "source_rows": [
+        19
+      ],
+      "impressions": 1800,
+      "clicks": 120,
+      "cost": 1440.0,
+      "platform_conversions": 5.0,
+      "crm_leads": 5,
+      "proposal_id": "af1e940ae9f6",
+      "action": "KEEP",
+      "priority": "P3",
+      "rule_id": "crm_leads_present",
+      "reason": "This campaign/query produced CRM leads. Keep eligible; this tool does not evaluate downstream lead quality or prove profitability.",
+      "source_reference": "Search Terms (last 90d) rows 19",
+      "proposed_negative": "",
+      "negative_match_type": "",
+      "change_scope": "",
+      "approval_status": "NO_CHANGE_PROPOSED",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Keep monitoring; no platform change is proposed."
+    },
+    {
+      "campaign": "INF - GS - Category Search",
+      "search_term": "open source llm api",
+      "product": "inference",
+      "match_types": [
+        "Broad"
+      ],
+      "source_rows": [
+        27
+      ],
+      "impressions": 4800,
+      "clicks": 210,
+      "cost": 1260.0,
+      "platform_conversions": 4.0,
+      "crm_leads": 3,
+      "proposal_id": "d59b6a1e4931",
+      "action": "KEEP",
+      "priority": "P3",
+      "rule_id": "crm_leads_present",
+      "reason": "This campaign/query produced CRM leads. Keep eligible; this tool does not evaluate downstream lead quality or prove profitability.",
+      "source_reference": "Search Terms (last 90d) rows 27",
+      "proposed_negative": "",
+      "negative_match_type": "",
+      "change_scope": "",
+      "approval_status": "NO_CHANGE_PROPOSED",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Keep monitoring; no platform change is proposed."
+    },
+    {
+      "campaign": "GS - NonBrand - AI Contact Center",
+      "search_term": "ai receptionist pricing",
+      "product": "voice",
+      "match_types": [
+        "Phrase"
+      ],
+      "source_rows": [
+        14
+      ],
+      "impressions": 2500,
+      "clicks": 150,
+      "cost": 1200.0,
+      "platform_conversions": 17.0,
+      "crm_leads": 4,
+      "proposal_id": "4135a1120305",
+      "action": "KEEP",
+      "priority": "P3",
+      "rule_id": "crm_leads_present",
+      "reason": "This campaign/query produced CRM leads. Keep eligible; this tool does not evaluate downstream lead quality or prove profitability.",
+      "source_reference": "Search Terms (last 90d) rows 14",
+      "proposed_negative": "",
+      "negative_match_type": "",
+      "change_scope": "",
+      "approval_status": "NO_CHANGE_PROPOSED",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Keep monitoring; no platform change is proposed."
+    },
+    {
+      "campaign": "GS - NonBrand - AI Contact Center",
+      "search_term": "ai phone answering service",
+      "product": "voice",
+      "match_types": [
+        "Phrase"
+      ],
+      "source_rows": [
+        13
+      ],
+      "impressions": 2900,
+      "clicks": 130,
+      "cost": 1040.0,
+      "platform_conversions": 5.0,
+      "crm_leads": 4,
+      "proposal_id": "507e13084c4e",
+      "action": "KEEP",
+      "priority": "P3",
+      "rule_id": "crm_leads_present",
+      "reason": "This campaign/query produced CRM leads. Keep eligible; this tool does not evaluate downstream lead quality or prove profitability.",
+      "source_reference": "Search Terms (last 90d) rows 13",
+      "proposed_negative": "",
+      "negative_match_type": "",
+      "change_scope": "",
+      "approval_status": "NO_CHANGE_PROPOSED",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Keep monitoring; no platform change is proposed."
+    },
+    {
+      "campaign": "GS - Competitor - Voice AI",
+      "search_term": "retell ai vs",
+      "product": "voice",
+      "match_types": [
+        "Phrase"
+      ],
+      "source_rows": [
+        20
+      ],
+      "impressions": 1400,
+      "clicks": 80,
+      "cost": 960.0,
+      "platform_conversions": 3.0,
+      "crm_leads": 3,
+      "proposal_id": "e4b7e04392f6",
+      "action": "KEEP",
+      "priority": "P3",
+      "rule_id": "crm_leads_present",
+      "reason": "This campaign/query produced CRM leads. Keep eligible; this tool does not evaluate downstream lead quality or prove profitability.",
+      "source_reference": "Search Terms (last 90d) rows 20",
+      "proposed_negative": "",
+      "negative_match_type": "",
+      "change_scope": "",
+      "approval_status": "NO_CHANGE_PROPOSED",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Keep monitoring; no platform change is proposed."
+    },
+    {
+      "campaign": "INF - GS - Category Search",
+      "search_term": "llm inference api",
+      "product": "inference",
+      "match_types": [
+        "Phrase"
+      ],
+      "source_rows": [
+        25
+      ],
+      "impressions": 2100,
+      "clicks": 130,
+      "cost": 780.0,
+      "platform_conversions": 8.0,
+      "crm_leads": 7,
+      "proposal_id": "311166c4a053",
+      "action": "KEEP",
+      "priority": "P3",
+      "rule_id": "crm_leads_present",
+      "reason": "This campaign/query produced CRM leads. Keep eligible; this tool does not evaluate downstream lead quality or prove profitability.",
+      "source_reference": "Search Terms (last 90d) rows 25",
+      "proposed_negative": "",
+      "negative_match_type": "",
+      "change_scope": "",
+      "approval_status": "NO_CHANGE_PROPOSED",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Keep monitoring; no platform change is proposed."
+    },
+    {
+      "campaign": "INF - GS - Category Search",
+      "search_term": "openai compatible api",
+      "product": "inference",
+      "match_types": [
+        "Phrase"
+      ],
+      "source_rows": [
+        26
+      ],
+      "impressions": 1500,
+      "clicks": 95,
+      "cost": 570.0,
+      "platform_conversions": 6.0,
+      "crm_leads": 6,
+      "proposal_id": "6ef085185a70",
+      "action": "KEEP",
+      "priority": "P3",
+      "rule_id": "crm_leads_present",
+      "reason": "This campaign/query produced CRM leads. Keep eligible; this tool does not evaluate downstream lead quality or prove profitability.",
+      "source_reference": "Search Terms (last 90d) rows 26",
+      "proposed_negative": "",
+      "negative_match_type": "",
+      "change_scope": "",
+      "approval_status": "NO_CHANGE_PROPOSED",
+      "freshness_gate": "REVIEW_REQUIRED",
+      "next_step": "Keep monitoring; no platform change is proposed."
+    }
+  ]
+}
