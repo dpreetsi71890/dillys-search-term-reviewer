@@ -11,7 +11,8 @@ The program was run locally with Python 3.12.14 and openpyxl 3.1.5. The reproduc
 - Thirteen groups had zero CRM leads and $19,640 of historical spend. Eleven proposed exclusions accounted for $16,460; two ambiguous queries accounted for $3,180.
 - Fifteen lead-producing queries remained eligible. The three pricing queries retained all 17 recorded CRM leads.
 - A current-date review on November 13, 2026 correctly marked the October 1 export as 43 days old and required a refresh before approval.
-- The workflow YAML parsed with manual, upload-triggered, and weekly runs and read-only repository permissions. A hosted GitHub run has not yet been verified; that requires the project to be uploaded to an authenticated account.
+- The workflow YAML parsed with manual, upload-triggered, and weekly runs and read-only repository permissions. The [initial push-triggered GitHub Actions run](https://github.com/dpreetsi71890/dillys-search-term-reviewer/actions/runs/43438033969) completed successfully on November 13, 2026 with Python 3.12.16. All 15 behavior tests passed, the review was generated, and the four report files were uploaded as `dillys-search-review-report`.
+- The downloaded GitHub artifact matched its recorded SHA-256 digest and contained `report.html`, `summary.md`, `proposals.csv`, and `report.json`. Its results matched the supplied dataset totals and correctly marked the source as 43 days old. Manual and Monday triggers are configured; this verification exercised the push trigger.
 - The branded HTML was checked for unique element IDs, complete embedded source records, escaped text, and valid JavaScript syntax. Its interactive controls were reviewed in code; a live browser interaction test could not run in the build environment.
 
 ## Limits of these checks

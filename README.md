@@ -6,17 +6,19 @@ Dilly's Search Term Reviewer turns Relay Cloud's search export into a practical 
 
 ## Open the example first
 
-Unzip the project, open the `dillys-search-term-reviewer` folder, and double-click **`sample_output/report.html`**. It opens in your browser. You can see the completed review without installing Python, opening a terminal, or setting up GitHub.
+Download and unzip the project, open the extracted folder (`dillys-search-term-reviewer` or `dillys-search-term-reviewer-main`), and double-click **`sample_output/report.html`**. It opens in your browser. You can see the completed review without installing Python, opening a terminal, or setting up GitHub.
 
 Start with **Decision queue** to see the items needing attention. Use **Exclusions**, **Closer look**, **Kept eligible**, or **All terms** to narrow the list, or search for a query or campaign. Expand **Evidence and next step** to inspect the reasoning behind a recommendation.
 
-To generate a fresh review, follow the local instructions below or use the [browser-only GitHub guide](docs/GITHUB_BEGINNER_GUIDE.md). GitHub will run the program for you once the project is uploaded.
+To generate a fresh review, follow the local instructions below or use the [browser-only GitHub guide](docs/GITHUB_BEGINNER_GUIDE.md). Open [Actions](https://github.com/dpreetsi71890/dillys-search-term-reviewer/actions) to view completed runs or start another review.
+
+**GitHub verification:** the [first automated run](https://github.com/dpreetsi71890/dillys-search-term-reviewer/actions/runs/43438033969) passed all 15 tests and generated the four report files on November 13, 2026. The current-date review correctly flagged the supplied historical workbook as needing a refresh before live changes can be approved.
 
 ## Run it in under 10 minutes
 
 You need **Python 3.10 or newer** and internet access once to install the Excel-reading dependency. GitHub is optional for running the downloaded project locally. Python installers are available at [python.org/downloads](https://www.python.org/downloads/).
 
-1. Download and unzip the project, or clone its GitHub repository. The project folder is named `dillys-search-term-reviewer`.
+1. Download and unzip the project, or clone its GitHub repository. The extracted folder may be named `dillys-search-term-reviewer-main`; a clone is usually named `dillys-search-term-reviewer`.
 2. Open a terminal in the project folder. You should see `search_review.py`, `config.json`, and `requirements.txt` there.
 3. The supplied workbook is included at `data/relay_cloud_paid_media_dataset.xlsx`. For another export, place the replacement workbook at that same path or change `--input`.
 4. Run the commands for your computer below. These commands create a separate Python environment without requiring an activation step.
@@ -119,7 +121,7 @@ On Windows, replace `.venv/bin/python` with `.\.venv\Scripts\python.exe`. Tests 
 
 ## Where to look next
 
-- [GitHub beginner guide](docs/GITHUB_BEGINNER_GUIDE.md): upload, run, and share the project using your browser.
+- [GitHub beginner guide](docs/GITHUB_BEGINNER_GUIDE.md): run the project, read the results, and share it using your browser.
 - [Automation ideas](docs/AUTOMATION_IDEAS.md): a prioritized backlog for the wider paid-media plan.
 - [AI assistance note](AI_ASSISTANCE.md): how AI helped build this submission and which recommendations were corrected.
 

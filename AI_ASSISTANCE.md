@@ -16,4 +16,4 @@ AI was useful for turning the analysis into repeatable code and for proposing ed
 
 ## Validation status
 
-The program was run locally on the supplied workbook. The repository contains its saved output and automated checks for the decision boundaries and input handling. The scheduled workflow is supplied for GitHub; a hosted run still needs to be verified after the files are placed in an authenticated GitHub account.
+The program was run locally on the supplied workbook. The repository contains its saved output and automated checks for the decision boundaries and input handling. The [initial push-triggered GitHub Actions run](https://github.com/dpreetsi71890/dillys-search-term-reviewer/actions/runs/43438033969) also completed successfully on November 13, 2026: all 15 tests passed and the four report files were generated and uploaded. Manual and weekly triggers are configured in the same workflow.

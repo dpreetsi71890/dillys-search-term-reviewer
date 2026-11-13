@@ -1,6 +1,8 @@
 # Using Dilly's Search Term Reviewer on GitHub
 
-**Start with the finished example.** Unzip the project, open the `dillys-search-term-reviewer` folder, and double-click `sample_output/report.html`. It opens in your browser without an installation or a terminal. The steps below put the project on GitHub so you can run it again and give the reviewers a working repository link.
+**Your private repository is already set up:** [dpreetsi71890/dillys-search-term-reviewer](https://github.com/dpreetsi71890/dillys-search-term-reviewer). The [first automated run](https://github.com/dpreetsi71890/dillys-search-term-reviewer/actions/runs/43438033969) succeeded. Start at section 3 to run another review, section 4 to read the results, or section 6 to give the reviewers access. Sections 1 and 2 are reference instructions for creating another copy.
+
+**Start with the finished example.** Download and unzip the project, open the extracted folder (`dillys-search-term-reviewer` or `dillys-search-term-reviewer-main`), and double-click `sample_output/report.html`. It opens in your browser without an installation or a terminal. The guide below explains how to run the project again and give the reviewers a working repository link.
 
 GitHub is a place to keep the project's files and share a link with the reviewers. A **repository**, usually shortened to **repo**, is the project's folder on GitHub. A **commit** saves a set of changes. **Actions** is the section that runs automated instructions. An **artifact** is a downloadable file produced by one of those runs.
 
